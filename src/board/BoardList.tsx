@@ -16,7 +16,7 @@ import TableCell from "@material-ui/core/TableCell/TableCell";
 import TableContainer from "@material-ui/core/TableContainer/TableContainer";
 import TableHead from "@material-ui/core/TableHead/TableHead";
 import TableRow from "@material-ui/core/TableRow/TableRow";
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useState } from "react";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -41,6 +41,8 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const BoardList: FunctionComponent = () => {
   const classes = useStyles();
+
+  const [viewState, setViewState] = useState<boolean>(false);
 
   return (
     <>
@@ -78,6 +80,9 @@ const BoardList: FunctionComponent = () => {
               </Table>
             </TableContainer>
           </Paper>
+          <div style={{ float: "right" }}>
+            <Button variant="contained">등록</Button>
+          </div>
         </Grid>
       </Grid>
     </>
