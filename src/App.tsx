@@ -1,15 +1,10 @@
 import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
+import BoardList from "./board/BoardList";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <p>Hello World</p>
-      </header>
-    </div>
-  );
+  return <BoardList />;
 }
 
 export default App;
