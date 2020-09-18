@@ -3,17 +3,17 @@ import logo from "./logo.svg";
 import "./App.css";
 import BoardList from "./board/BoardList";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
-import Index from "./main/Index";
+import LayOutContainer from "./container/layout/index";
 
 const App: FunctionComponent = () => {
   return (
     <Router>
       <Switch>
         <Route path={["/board"]}>
-          <BoardList />
+          <LayOutContainer />
         </Route>
         <Route path={["", "/"]}>
-          <Index />
+          <LayOutContainer />
         </Route>
       </Switch>
     </Router>
