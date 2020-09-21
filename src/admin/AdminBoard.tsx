@@ -1,18 +1,24 @@
 import {
-    AppBar,
-    Button,
-    createStyles,
-    Grid,
-    IconButton,
-    Theme,
-    Toolbar,
-    Typography,
-  } from "@material-ui/core";
-  import makeStyles from "@material-ui/core/styles/makeStyles";
-  import React, { FunctionComponent, useState } from "react";
-import AdminBoardCreate from './AdminBoardCreate'
-import AdminBoardList from './AdminBoardList'
-import AdminBoardVo, {create as createAdminBoardVo} from './AdminBoardVo'
+  AppBar,
+  Button,
+  createStyles,
+  Grid,
+  IconButton,
+  Theme,
+  Toolbar,
+  Typography,
+} from "@material-ui/core";
+import makeStyles from "@material-ui/core/styles/makeStyles";
+import { RootState } from "modules";
+import { selectAllBoardList } from "modules/board/selector";
+import React, { FunctionComponent, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import AdminBoardCreate from "./AdminBoardCreate";
+import AdminBoardList from "./AdminBoardList";
+import AdminBoardVo, {
+  create as createAdminBoardVo,
+  empty as emptyAdminBoardVo,
+} from "./AdminBoardVo";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -35,51 +41,79 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-
 const AdminBoard = () => {
-    const classes = useStyles();
+  const classes = useStyles();
 
-    const [viewState, setViewState] = useState<boolean>(false);
-    const [adminBoardVoList, setAdminBoardVoList] = useState<AdminBoardVo[]>([]);
+  const selectBoardList = useSelector;
+  const items = useSelector<RootState, ReturnType<typeof selectAllBoardList>>(
+    selectAllBoardList
+  );
 
-    const createBtnClickHandler = (vo: AdminBoardVo) => {
+  useEffect(() => {
+    console.log(items);
+    debugger;
+  }, [items]);
 
-        //adminBoardVoList.push( createAdminBoardVo( {...vo, no: adminBoardVoList.length + 1} ));
-        setAdminBoardVoList([
-            ...adminBoardVoList,
-            createAdminBoardVo( {...vo, no: adminBoardVoList.length + 1} )
-        ]);
+  const [viewState, setViewState] = useState<boolean>(false);
+  const [adminBoardVoList, setAdminBoardVoList] = useState<AdminBoardVo[]>([]);
 
-        setViewState(true);
-    }
+  const [useAdminBoardVo, setCreateAdminBoardVo] = useState<AdminBoardVo>(
+    emptyAdminBoardVo
+  );
 
-    return (
-        <>
-          <AppBar position="static">
-            <Toolbar>
-              <IconButton
-                edge="start"
-                className={classes.menuButton}
-                color="inherit"
-                aria-label="menu"
-              >
-                아이콘
-              </IconButton>
-              <Typography variant="h6" className={classes.title}>
-                News
-              </Typography>
-              <Button color="inherit">Login</Button>
-            </Toolbar>
-          </AppBar>
-          <Grid container className={classes.root} spacing={2}>
-            {viewState === true ? 
-            <AdminBoardList setViewState={setViewState} adminBoardVoList={adminBoardVoList}/> :
-             <AdminBoardCreate setViewState={setViewState} createBtnClickHandler={createBtnClickHandler} />
-             }
-          </Grid>
-        </>
-      );
+  const createBtnClickHandler = () => {
+    setAdminBoardVoList([
+      ...adminBoardVoList,
+      {
+        ...useAdminBoardVo,
+        no: adminBoardVoList.length + 1,
+      },
+    ]);
+    setViewState(true);
+  };
 
-}
+  return (
+    <>
+      <AppBar position="static">
+        <Toolbar>
+          <IconButton
+            edge="start"
+            className={classes.menuButton}
+            color="inherit"
+            aria-label="menu"
+          >
+            아이콘
+          </IconButton>
+          <Typography variant="h6" className={classes.title}>
+            News
+          </Typography>
+          <Button color="inherit">Login</Button>
+        </Toolbar>
+      </AppBar>
+      <Grid container className={classes.root} spacing={2}>
+        {viewState === true ? (
+          <AdminBoardList
+            setViewState={setViewState}
+            adminBoardVoList={adminBoardVoList}
+          />
+        ) : (
+          <div>
+            <AdminBoardCreate
+              setViewState={setViewState}
+              createBtnClickHandler={createBtnClickHandler}
+              useAdminBoardVo={useAdminBoardVo}
+              setCreateAdminBoardVo={setCreateAdminBoardVo}
+            />
+            <div style={{ float: "right" }}>
+              <Button variant="contained" onClick={createBtnClickHandler}>
+                등록
+              </Button>
+            </div>
+          </div>
+        )}
+      </Grid>
+    </>
+  );
+};
 
 export default AdminBoard;
