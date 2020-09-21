@@ -3,6 +3,7 @@ import React, { FunctionComponent } from "react";
 import { Route, Switch, useLocation } from "react-router-dom";
 import BoardList from "../../board/BoardList";
 import Index from "../main/Index";
+import AdminBoardInfo from "../../admin/AdminBoardInfo";
 
 const useStyles = makeStyles({
   root: {},
@@ -51,6 +52,11 @@ const LayoutContainer: FunctionComponent = () => {
             path: "/board",
             exact: true,
             Content: () => <BoardList />,
+          },
+          {
+            path: `/admin/board/detail/:no`,
+            exact: true,
+            Content: () => <AdminBoardInfo />,
           },
         ].map(({ path, exact, Content }) => (
           <Route
