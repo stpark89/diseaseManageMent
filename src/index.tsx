@@ -3,6 +3,8 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
+import { Provider } from "react-redux";
+import store from "store";
 
 const defaultTheme = createMuiTheme({
   typography: {
@@ -24,11 +26,13 @@ const defaultTheme = createMuiTheme({
 });
 
 ReactDOM.render(
-  <ThemeProvider theme={defaultTheme}>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
-  </ThemeProvider>,
+  <Provider store={store}>
+    <ThemeProvider theme={defaultTheme}>
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    </ThemeProvider>
+  </Provider>,
   document.getElementById("root")
 );
 
