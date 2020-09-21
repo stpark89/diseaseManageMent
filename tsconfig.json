@@ -16,12 +16,8 @@
     "strictPropertyInitialization": false,
     "noEmit": true,
     "jsx": "react",
-<<<<<<< HEAD
-    "strictPropertyInitialization": false
-=======
     "noImplicitAny": true,
     "baseUrl": "src"
->>>>>>> 1f39a59e732eb186aa46c8dc95a6fd5231a5034b
   },
   "exclude": ["dist", "build", "node_modules", "public"],
   "include": ["src"]
