@@ -3,11 +3,8 @@ import React, { FunctionComponent } from "react";
 import { Route, Switch } from "react-router-dom";
 import BoardList from "../../board/BoardList";
 import Index from "../main/Index";
-<<<<<<< HEAD
 import AdminBoardInfo from "../../admin/AdminBoardInfo";
-=======
 import Header from "./header";
->>>>>>> 1f39a59e732eb186aa46c8dc95a6fd5231a5034b
 
 const useStyles = makeStyles({
   root: {
