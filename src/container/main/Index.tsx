@@ -1,11 +1,16 @@
-import React, { FunctionComponent } from "react";
+import { Grid } from "@material-ui/core";
+import React, { FunctionComponent, useEffect } from "react";
 
 const Index: FunctionComponent = () => {
   return (
-    <div>
-      <h5>작업중</h5>
-      <h1>메인페이지</h1>
-    </div>
+    <Grid container spacing={2}>
+      <Grid item xs={4}>
+        <p>질병사전</p>
+      </Grid>
+      <Grid item xs={4}>
+        <p>질병사전</p>
+      </Grid>
+    </Grid>
   );
 };
 
